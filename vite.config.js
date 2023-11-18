@@ -5,8 +5,6 @@ import Markdown from 'vite-plugin-md'
 import UnoCSS from 'unocss/vite'
 import { resolve } from 'path'
 
-const baseApi = process.env.VITE_APP_BASE_API
-
 export default {
   plugins: [
     vue({
@@ -51,17 +49,21 @@ export default {
 
   base: process.env.VITE_APP_PUBLIC_PATH || '/',
   server: {
+    // port: 1024,
+    host: true,
+    open: true,
     proxy: {
-      [baseApi]: {
+      // https://cn.vitejs.dev/config/#server-proxy
+      '/dev-api': {
         target: 'http://localhost:8080',
         changeOrigin: true,
-        rewrite: (path) => path.replace(new RegExp('^' + baseApi), ''),
+        rewrite: (p) => p.replace(/^\/dev-api/, '')
       },
     },
     hmr: {
       protocol: 'ws',
-      host: '0.0.0.0',
-    //   host: mode === 'development' ? 'localhost' : undefined,
+      // host: '0.0.0.0',
+      // host: mode === 'development' ? 'localhost' : undefined,
     },
     // disableHostCheck: mode === 'development',
   },

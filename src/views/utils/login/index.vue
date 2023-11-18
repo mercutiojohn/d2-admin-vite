@@ -61,7 +61,8 @@
                     v-model="formLogin.code"
                     placeholder="验证码">
                     <template slot="append">
-                      <img class="login-code" src="./image/login-code.png">
+                      <!-- <img class="login-code" src="./image/login-code.png"> -->
+                      <img class="login-code" :src="codeUrl" @click="getCode"/>
                     </template>
                   </el-input>
                 </el-form-item>
@@ -131,6 +132,7 @@
 import dayjs from 'dayjs'
 import { mapActions } from 'vuex'
 import localeMixin from '@/locales/mixin.js'
+import { getCodeImg } from "@/api/login"
 export default {
   mixins: [
     localeMixin
@@ -138,6 +140,12 @@ export default {
   data () {
     return {
       timeInterval: null,
+      // 验证码开关
+      captchaEnabled: true,
+      // 验证码图片 URL
+      codeUrl: "",
+      // 注册开关
+      register: false,
       time: dayjs().format('HH:mm:ss'),
       // 快速选择用户
       dialogVisible: false,
@@ -162,7 +170,9 @@ export default {
       formLogin: {
         username: 'admin',
         password: 'admin123',
-        code: 'v9am'
+        rememberMe: false,
+        code: '',
+        uuid: ''
       },
       // 表单校验
       rules: {
@@ -237,7 +247,16 @@ export default {
           this.$message.error('表单校验失败，请检查')
         }
       })
-    }
+    },
+    getCode () {
+      getCodeImg().then(res => {
+        this.captchaEnabled = res.captchaEnabled === undefined ? true : res.captchaEnabled;
+        if (this.captchaEnabled) {
+          this.codeUrl = "data:image/gif;base64," + res.img;
+          this.formLogin.uuid = res.uuid;
+        }
+      });
+    },
   }
 }
 </script>
