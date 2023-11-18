@@ -34,6 +34,7 @@
     "dayjs": "^1.11.9",
     "element-ui": "^2.15.14",
     "faker": "^4.1.0",
+    "file-saver": "2.0.5",
     "flex.css": "^1.1.7",
     "fuse.js": "^5.2.3",
     "github-markdown-css": "^4.0.0",

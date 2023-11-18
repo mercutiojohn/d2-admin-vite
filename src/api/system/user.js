@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import { request } from '@/api/_service.js'
 import { parseStrEmpty } from "@/utils/ruoyi";
 
 // 查询用户列表

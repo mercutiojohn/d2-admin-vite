@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import { request } from '@/api/_service.js'
 
 // 查询角色列表
 export function listRole(query) {

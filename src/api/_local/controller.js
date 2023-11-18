@@ -1,5 +1,5 @@
 // import storage from 'store2'
-// import request from '@/utils/request'
+// import { request } from '@/api/_service.js'
 
 const ipcApiRoute = {
   test: 'controller.example.test',

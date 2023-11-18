@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import { request } from '@/api/_service.js'
 
 // 获取服务信息
 export function getServer() {

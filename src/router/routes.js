@@ -22,7 +22,7 @@ const frameIn = [
           title: '首页',
           auth: true
         },
-        component: () => import('@/views/system/index/index.vue')
+        component: () => import('@/views/utils/index/index.vue')
       },
       // 系统 前端日志
       {
@@ -32,21 +32,21 @@ const frameIn = [
           title: '前端日志',
           auth: true
         },
-        component: () => import('@/views/system/log/index.vue')
+        component: () => import('@/views/utils/log/index.vue')
       },
       // 刷新页面 必须保留
       {
         path: 'refresh',
         name: 'refresh',
         hidden: true,
-        component: () => import('@/views/system/function/refresh/index.js')
+        component: () => import('@/views/utils/function/refresh/index.js')
       },
       // 页面重定向 必须保留
       {
         path: 'redirect/:route*',
         name: 'redirect',
         hidden: true,
-        component: () => import('@/views/system/function/redirect/index.js')
+        component: () => import('@/views/utils/function/redirect/index.js')
       }
     ]
   },
@@ -63,7 +63,7 @@ const frameOut = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/system/login/index.vue')
+    component: () => import('@/views/utils/login/index.vue')
   }
 ]
 
@@ -74,7 +74,7 @@ const errorPage = [
   {
     path: '*',
     name: '404',
-    component: () => import('@/views/system/error/404/index.vue')
+    component: () => import('@/views/utils/error/404/index.vue')
   }
 ]
 

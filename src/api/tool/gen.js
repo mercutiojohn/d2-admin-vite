@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import { request } from '@/api/_service.js'
 
 // 查询生成表数据
 export function listTable(query) {

@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import { request } from '@/api/_service.js'
 
 // 查询缓存详细
 export function getCache() {

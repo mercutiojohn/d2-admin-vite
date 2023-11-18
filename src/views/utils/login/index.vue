@@ -145,7 +145,7 @@ export default {
         {
           name: 'Admin',
           username: 'admin',
-          password: 'admin'
+          password: 'admin123'
         },
         {
           name: 'Editor',
@@ -161,7 +161,7 @@ export default {
       // 表单
       formLogin: {
         username: 'admin',
-        password: 'admin',
+        password: 'admin123',
         code: 'v9am'
       },
       // 表单校验
@@ -184,7 +184,7 @@ export default {
           {
             required: true,
             message: '请输入验证码',
-            trigger: 'blur'
+            trigger: 'change'
           }
         ]
       }
