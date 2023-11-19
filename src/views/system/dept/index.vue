@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <d2-container>
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <el-form-item label="部门名称" prop="deptName">
         <el-input
@@ -154,7 +154,7 @@
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
-  </div>
+  </d2-container>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="user-info-head" @click="editCropper()"><img v-bind:src="options.img" title="点击上传头像" class="img-circle img-lg" /></div>
+    <div class="user-info-head" @click="editCropper()"><img v-bind:src="info.avatar" title="点击上传头像" class="img-circle img-lg" /></div>
     <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body @opened="modalOpened"  @close="closeDialog">
       <el-row>
         <el-col :xs="24" :md="12" :style="{height: '350px'}">
@@ -58,9 +58,15 @@ import store from "@/store";
 import { VueCropper } from "vue-cropper";
 import { uploadAvatar } from "@/api/system/user";
 import { debounce } from '@/libs/util.index'
+import { mapState } from 'vuex'
 
 export default {
   components: { VueCropper },
+  computed: {
+    ...mapState('d2admin/user', [
+      'info'
+    ]),
+  },
   data() {
     return {
       // 是否显示弹出层
@@ -70,7 +76,7 @@ export default {
       // 弹出层标题
       title: "修改头像",
       options: {
-        img: store.getters.avatar, //裁剪图片的地址
+        img: '', //裁剪图片的地址
         autoCrop: true, // 是否默认生成截图框
         autoCropWidth: 200, // 默认生成截图框宽度
         autoCropHeight: 200, // 默认生成截图框高度
@@ -88,6 +94,7 @@ export default {
     },
     // 打开弹出层结束时的回调
     modalOpened() {
+      this.options.img = this.info.avatar
       this.visible = true;
       if (!this.resizeHandler) {
         this.resizeHandler = debounce(() => {
@@ -135,8 +142,10 @@ export default {
         formData.append("avatarfile", data);
         uploadAvatar(formData).then(response => {
           this.open = false;
-          this.options.img = process.env.VUE_APP_BASE_API + response.imgUrl;
-          store.commit('SET_AVATAR', this.options.img);
+          const imgUrl = import.meta.env.VITE_APP_BASE_API + response.imgUrl
+          // this.options.img = imgUrl
+          this.$store.dispatch('d2admin/user/setAvatar', imgUrl)
+          // this.options.img = this.info.avatar
           this.$message.success("修改成功");
           this.visible = false;
         });
@@ -152,6 +161,9 @@ export default {
       this.visible = false;
       window.removeEventListener("resize", this.resizeHandler)
     }
+  },
+  mounted() {
+    this.options.img = this.info.avatar
   }
 };
 </script>

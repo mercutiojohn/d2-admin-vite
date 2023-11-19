@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <d2-container>
     <el-row :gutter="20">
       <el-col :span="6" :xs="24">
         <el-card class="box-card">
@@ -55,7 +55,7 @@
         </el-card>
       </el-col>
     </el-row>
-  </div>
+  </d2-container>
 </template>
 
 <script>

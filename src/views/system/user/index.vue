@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <d2-container>
     <el-row :gutter="20">
       <!--部门数据-->
       <el-col :span="4" :xs="24">
@@ -337,7 +337,7 @@
         <el-button @click="upload.open = false">取 消</el-button>
       </div>
     </el-dialog>
-  </div>
+  </d2-container>
 </template>
 
 <script>

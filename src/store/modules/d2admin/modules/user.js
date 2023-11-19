@@ -21,6 +21,18 @@ export default {
         user: true
       }, { root: true })
     },
+    async setAvatar ({ state, dispatch }, avatar) {
+      console.log('[setAvatar]', avatar)
+      // store 赋值
+      state.info.avatar = avatar
+      // 持久化
+      await dispatch('d2admin/db/set', {
+        dbName: 'sys',
+        path: 'user.info.avatar',
+        value: avatar,
+        user: true
+      }, { root: true })
+    },
     /**
      * @description 从数据库取用户数据
      * @param {Object} context

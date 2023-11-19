@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <d2-container>
      <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch">
       <el-form-item label="用户名称" prop="userName">
         <el-input
@@ -96,7 +96,7 @@
       @pagination="getList"
     />
     <select-user ref="select" :roleId="queryParams.roleId" @ok="handleQuery" />
-  </div>
+  </d2-container>
 </template>
 
 <script>

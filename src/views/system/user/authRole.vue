@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <d2-container>
     <h4 class="form-header h4">基本信息</h4>
     <el-form ref="form" :model="form" label-width="80px">
       <el-row>
@@ -42,7 +42,7 @@
         <el-button @click="close()">返回</el-button>
       </el-form-item>
     </el-form>
-  </div>
+  </d2-container>
 </template>
 
 <script>

@@ -43,7 +43,8 @@ export default {
       // 设置 vuex 用户信息
       const avatar = (userInfo.user.avatar == "" || userInfo.user.avatar == null)
       ? defaultAvatar
-      : import.meta.env.VITE_APP_BASE_API + userInfo.user.avatar;      const roles = ['ROLE_DEFAULT']
+      : import.meta.env.VITE_APP_BASE_API + userInfo.user.avatar;
+      const roles = ['ROLE_DEFAULT']
       const permissions = []
       if (res.roles && res.roles.length > 0) { // 验证返回的roles是否是一个非空数组
         roles = userInfo.roles
