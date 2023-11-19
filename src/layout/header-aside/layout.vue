@@ -18,7 +18,7 @@
         <div class="toggle-aside-btn" @click="handleToggleAside" flex-box="0">
           <d2-icon name="i-ri:menu-fill"/>
         </div>
-        <d2-menu-header flex-box="1"/>
+        <d2-menu-header flex-box="1" v-if="['separate', 'header'].includes(menuMode)"/>
         <!-- 顶栏右侧 -->
         <div class="d2-header-right" flex-box="0">
           <!-- 如果你只想在开发环境显示这个按钮请添加 v-if="$env === 'development'" -->
@@ -124,7 +124,8 @@ export default {
       transitionActive: state => state.transition.active,
       asideCollapse: state => state.menu.asideCollapse,
       asideLength: state => state.menu.aside.length,
-      asideTransition: state => state.menu.asideTransition
+      asideTransition: state => state.menu.asideTransition,
+      menuMode: state => state.menu.menuMode
     }),
     ...mapGetters('d2admin', {
       themeActiveSetting: 'theme/activeSetting'
