@@ -451,6 +451,7 @@
           .d2-container-full {
             border: $theme-container-border-outer;
             border-top: none;
+            border-right: $frame-border-right;
             border-bottom: none;
             .d2-container-full__header {
               border-bottom: $theme-container-border-inner;
