@@ -30,32 +30,34 @@
         </el-tabs>
       </div>
     </div>
-    <div class="d2-multiple-page-control-btn" flex-box="0" v-if="showControlBtn">
-      <el-dropdown
+    <div class="d2-multiple-page-control-btn flex" flex-box="0" v-if="showControlBtn">
+      <d2-header-fullscreen/>
+      <d2-header-hide/>
+      <!-- <el-dropdown
         size="default"
         split-button
         @click="closeAll"
         @command="command => handleControlItemClick(command)">
-        <d2-icon name="i-fa-dismiss"/>
+        <d2-icon name="i-fluent:dismiss-square-multiple-16-regular" class="d2-mr-10"/>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="left">
-            <d2-icon name="i-fa-arrow-left" class="d2-mr-10"/>
+            <d2-icon name="i-fluent:arrow-left-16-regular" class="d2-mr-10"/>
             关闭左侧
           </el-dropdown-item>
           <el-dropdown-item command="right">
-            <d2-icon name="i-fa-arrow-right" class="d2-mr-10"/>
+            <d2-icon name="i-fluent:arrow-right-16-regular" class="d2-mr-10"/>
             关闭右侧
           </el-dropdown-item>
           <el-dropdown-item command="other">
-            <d2-icon name="i-fa-square-dismiss" class="d2-mr-10"/>
+            <d2-icon name="i-fluent:square-dismiss-16-regular" class="d2-mr-10"/>
             关闭其它
           </el-dropdown-item>
           <el-dropdown-item command="all">
-            <d2-icon name="i-fa-dismiss-square-multiple" class="d2-mr-10"/>
+            <d2-icon name="i-fluent:dismiss-square-multiple-16-regular" class="d2-mr-10"/>
             全部关闭
           </el-dropdown-item>
         </el-dropdown-menu>
-      </el-dropdown>
+      </el-dropdown> -->
     </div>
   </div>
 </template>
@@ -67,11 +69,13 @@ import Sortable from 'sortablejs'
 export default {
   components: {
     D2Contextmenu: () => import('../contextmenu/index.vue'),
-    D2ContextmenuList: () => import('../contextmenu/components/contentmenuList/index.vue')
+    D2ContextmenuList: () => import('../contextmenu/components/contentmenuList/index.vue'),
+    D2HeaderFullscreen: () => import('../header-fullscreen/index.vue'),
+    D2HeaderHide: () => import('../header-hide/index.vue'),
   },
   data () {
     return {
-      showControlBtn: false,
+      showControlBtn: true,
       contextmenuFlag: false,
       contentmenuX: 0,
       contentmenuY: 0,

@@ -197,6 +197,9 @@
         line-height: 60px;
       }
     }
+    .d2-theme-header-transition {
+      transition: height .3s, opacity .2s;
+    }
     .d2-theme-container {
       .d2-theme-container-aside {
         position: relative;
@@ -470,8 +473,21 @@
             }
             .d2-multiple-page-control-btn {
               position: relative;
-              bottom: -1px;
+              border-bottom-width: 1px;
+              border-bottom-style: solid;
+              // 顶栏右侧的按钮
+              display: flex;
+              align-items: center;
+              .btn-text {
+                padding: 2px 12px;
+                border-radius: 4px;
+                margin: 0px !important;
+                &.el-color-picker.el-color-picker--mini {
+                  padding: 9px 6px;
+                }
+              }
               .el-dropdown {
+                @extend %unable-select;
                 .el-button-group {
                   display: flex;
                   .el-button:first-child {

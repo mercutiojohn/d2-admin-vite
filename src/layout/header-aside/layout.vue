@@ -5,7 +5,7 @@
     <!-- 主体内容 -->
     <div class="d2-layout-header-aside-content" flex="dir:top">
       <!-- 顶栏 -->
-      <div class="d2-theme-header" :style="{ /* opacity: this.searchActive ? 0.5 : 1 */ }" flex-box="0" flex>
+      <div class="d2-theme-header" :class="{ 'd2-theme-header-transition': asideTransition }" :style="{ height: headerHide ? 0 : '60px', opacity: headerHide ? 0 : 1, pointerEvents: headerHide ? 'none' : 'unset' }" flex-box="0" flex>
         <div :class="`window-controls-area ${currPlatform}`" v-if="isElectron && currPlatform === 'mac'"></div>
         <router-link
           to="/index"
@@ -26,7 +26,8 @@
           <!-- 如果你只想在开发环境显示这个按钮请添加 v-if="$env === 'development'" -->
           <d2-header-search @click="handleSearchClick"/>
           <d2-header-log v-if="$env === 'development'"/>
-          <d2-header-fullscreen/>
+          <!-- <d2-header-fullscreen/> -->
+          <!-- <d2-header-hide/> -->
           <d2-header-theme/>
           <!-- <d2-header-size/> -->
           <!-- <d2-header-menu-mode/> -->
@@ -83,6 +84,7 @@ import d2MenuSide from './components/menu-side'
 import d2MenuHeader from './components/menu-header'
 import d2Tabs from './components/tabs/index.vue'
 import d2HeaderFullscreen from './components/header-fullscreen/index.vue'
+import d2HeaderHide from './components/header-hide/index.vue'
 import d2HeaderLocales from './components/header-locales/index.vue'
 import d2HeaderSearch from './components/header-search/index.vue'
 // import d2HeaderSize from './components/header-size/index.vue'
@@ -104,6 +106,7 @@ export default {
     d2MenuHeader,
     d2Tabs,
     d2HeaderFullscreen,
+    d2HeaderHide,
     d2HeaderLocales,
     d2HeaderSearch,
     // d2HeaderSize,
@@ -133,6 +136,7 @@ export default {
       menuMode: state => state.menu.menuMode,
       openedPages: state => state.page.opened,
       currentPage: state => state.page.current,
+      headerHide: state => state.headerhide.active,
     }),
     ...mapGetters('d2admin', {
       themeActiveSetting: 'theme/activeSetting'
