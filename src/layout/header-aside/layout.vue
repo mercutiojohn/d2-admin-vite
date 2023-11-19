@@ -5,7 +5,7 @@
     <!-- 主体内容 -->
     <div class="d2-layout-header-aside-content" flex="dir:top">
       <!-- 顶栏 -->
-      <div class="d2-theme-header" :style="{ opacity: this.searchActive ? 0.5 : 1 }" flex-box="0" flex>
+      <div class="d2-theme-header" :class="{ 'd2-theme-header-transition': asideTransition }" :style="{ height: headerHide ? 0 : '60px', opacity: headerHide ? 0 : 1, pointerEvents: headerHide ? 'none' : 'unset' }" flex-box="0" flex>
         <div :class="`window-controls-area ${currPlatform}`" v-if="isElectron && currPlatform === 'mac'"></div>
         <router-link
           to="/index"
@@ -18,15 +18,19 @@
         <div class="toggle-aside-btn" @click="handleToggleAside" flex-box="0">
           <d2-icon name="i-ri:menu-fill"/>
         </div>
-        <d2-menu-header flex-box="1"/>
+        <d2-menu-header flex-box="1" v-if="['separate', 'header'].includes(menuMode)"/>
+        <!-- <div class="d2-theme-header-name" v-else>{{currentPage === '/index' ? 'D2Admin' : openedPages.filter((item) => item.fullPath === currentPage)[0].meta.title}}</div> -->
+        <div class="d2-theme-header-name" v-else>{{openedPages.filter((item) => item.fullPath === currentPage)[0].meta.title}}</div>
         <!-- 顶栏右侧 -->
         <div class="d2-header-right" flex-box="0">
           <!-- 如果你只想在开发环境显示这个按钮请添加 v-if="$env === 'development'" -->
           <d2-header-search @click="handleSearchClick"/>
-          <d2-header-log/>
-          <d2-header-fullscreen/>
+          <d2-header-log v-if="$env === 'development'"/>
+          <!-- <d2-header-fullscreen/> -->
+          <!-- <d2-header-hide/> -->
           <d2-header-theme/>
-          <d2-header-size/>
+          <!-- <d2-header-size/> -->
+          <!-- <d2-header-menu-mode/> -->
           <!-- <d2-header-locales/> -->
           <!-- <d2-header-color/> -->
           <d2-header-user/>
@@ -41,10 +45,10 @@
           ref="aside"
           :class="{'d2-theme-container-aside': true, 'd2-theme-container-transition': asideTransition}"
           :style="{
-            width: asideLength ? (asideCollapse ? asideWidthCollapse : asideWidth) : 0,
-            opacity: this.searchActive ? 0.5 : 1
+            width: asideLength && ['separate', 'aside'].includes(menuMode) ? (asideCollapse ? asideWidthCollapse : asideWidth) : 0,
+            // opacity: this.searchActive ? 0.5 : 1
           }">
-          <d2-menu-side/>
+          <d2-menu-side v-if="['separate', 'aside'].includes(menuMode)"/>
         </div>
         <!-- 主体 -->
         <div class="d2-theme-container-main" flex-box="1" flex>
@@ -80,9 +84,11 @@ import d2MenuSide from './components/menu-side'
 import d2MenuHeader from './components/menu-header'
 import d2Tabs from './components/tabs/index.vue'
 import d2HeaderFullscreen from './components/header-fullscreen/index.vue'
+import d2HeaderHide from './components/header-hide/index.vue'
 import d2HeaderLocales from './components/header-locales/index.vue'
 import d2HeaderSearch from './components/header-search/index.vue'
-import d2HeaderSize from './components/header-size/index.vue'
+// import d2HeaderSize from './components/header-size/index.vue'
+// import d2HeaderMenuMode from './components/header-menu-mode/index.vue'
 import d2HeaderTheme from './components/header-theme/index.vue'
 import d2HeaderUser from './components/header-user/index.vue'
 import d2HeaderLog from './components/header-log/index.vue'
@@ -100,9 +106,11 @@ export default {
     d2MenuHeader,
     d2Tabs,
     d2HeaderFullscreen,
+    d2HeaderHide,
     d2HeaderLocales,
     d2HeaderSearch,
-    d2HeaderSize,
+    // d2HeaderSize,
+    // d2HeaderMenuMode,
     d2HeaderTheme,
     d2HeaderUser,
     d2HeaderLog,
@@ -124,7 +132,11 @@ export default {
       transitionActive: state => state.transition.active,
       asideCollapse: state => state.menu.asideCollapse,
       asideLength: state => state.menu.aside.length,
-      asideTransition: state => state.menu.asideTransition
+      asideTransition: state => state.menu.asideTransition,
+      menuMode: state => state.menu.menuMode,
+      openedPages: state => state.page.opened,
+      currentPage: state => state.page.current,
+      headerHide: state => state.headerhide.active,
     }),
     ...mapGetters('d2admin', {
       themeActiveSetting: 'theme/activeSetting'

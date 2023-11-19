@@ -45,6 +45,7 @@
   transform: scale(.8);
 }
 
+// 过渡动画 遮罩渐隐
 .fade-mask-leave-active {
   transition: opacity .3s;
 }

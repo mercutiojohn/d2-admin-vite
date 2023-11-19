@@ -12,7 +12,9 @@ export default {
     // 侧边栏收缩
     asideCollapse: setting.menu.asideCollapse,
     // 侧边栏折叠动画
-    asideTransition: setting.menu.asideTransition
+    asideTransition: setting.menu.asideTransition,
+    // 菜单模式
+    menuMode: setting.menu.menuMode
   },
   actions: {
     /**
@@ -63,6 +65,22 @@ export default {
       }, { root: true })
     },
     /**
+     * 设置菜单模式
+     * @param {Object} context
+     * @param {Boolean} transition is transition
+     */
+    async menuModeSet ({ state, dispatch }, menuMode) {
+      // store 赋值
+      state.menuMode = menuMode
+      // 持久化
+      await dispatch('d2admin/db/set', {
+        dbName: 'sys',
+        path: 'menu.menuMode',
+        value: state.menuMode,
+        user: true
+      }, { root: true })
+    },
+    /**
      * 切换侧边栏折叠动画
      * @param {Object} context
      */
@@ -91,6 +109,7 @@ export default {
       }, { root: true })
       state.asideCollapse = menu.asideCollapse !== undefined ? menu.asideCollapse : setting.menu.asideCollapse
       state.asideTransition = menu.asideTransition !== undefined ? menu.asideTransition : setting.menu.asideTransition
+      state.menuMode = menu.menuMode !== undefined ? menu.menuMode : setting.menu.menuMode
     },
     /**
      * 从后台加载菜单路由

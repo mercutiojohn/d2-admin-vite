@@ -10,7 +10,8 @@ export default {
   // 侧边栏默认配置
   menu: {
     asideCollapse: false,
-    asideTransition: true
+    asideTransition: true,
+    menuMode: 'separate' // separate 顶栏和侧栏联动; aside 仅侧栏; header 仅顶栏
   },
   // 在读取持久化数据失败时默认页面
   page: {

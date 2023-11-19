@@ -21,22 +21,82 @@ function supplementPath (menu) {
     } : {}
   }))
 }
+/**
+ * @description 过滤掉 path 中包含 'index' 的项
+ * @param {Object} menu 原始的菜单数据
+ */
+function filterOutIndexPath(menu) {
+  console.log(menu)
+  return menu.children ? menu.children.filter(item => item.path && !item.path.includes('index')) : []
+}
+/**
+ * @description 返回菜单中的 'index' 项
+ * @param {Object} menu 原始的菜单数据
+ */
+function filterIndexPath(menu) {
+  console.log(menu)
+  let result = JSON.parse(JSON.stringify(menu))
+  let pathObjList = menu.children ? menu.children.filter(item => item.path && item.path.includes('index')) : []
+  if (pathObjList.length) {
+    result.path = pathObjList[0].path
+  }
+  delete result.children
+  return result
+}
 
-// 菜单 侧边栏
+
+// 菜单 侧边栏模式
 export const menuAside = supplementPath([
-  // demoComponents,
-  // demoPlugins,
-  // demoPlayground
+  {
+    path: '/index',
+    title: '首页',
+    icon: 'i-ri:home-line',
+  },
+  demoComponents,
+  demoPlugins,
+  demoPlayground
 ])
 
-// 菜单 顶栏
+// 菜单 顶栏模式
 export const menuHeader = supplementPath([
   {
     path: '/index',
     title: '首页',
     icon: 'i-ri:home-line'
   },
-  // demoPlayground,
-  // demoComponents,
-  // demoPlugins
+  demoPlayground,
+  demoComponents,
+  demoPlugins
 ])
+
+// 菜单 联动模式
+export const menuSeparate = {
+  aside: supplementPath([
+    demoComponents,
+    demoPlugins,
+    demoPlayground
+  ]),
+  header: supplementPath([
+    {
+      path: '/index',
+      title: '首页',
+      icon: 'i-ri:home-line'
+    },
+    filterIndexPath(demoPlayground),
+    filterIndexPath(demoComponents),
+    filterIndexPath(demoPlugins)
+  ])
+}
+
+// 菜单 搜索专用
+export const menuSearch = supplementPath([
+  {
+    path: '/index',
+    title: '首页',
+    icon: 'i-ri:home-line'
+  },
+  demoPlayground,
+  demoComponents,
+  demoPlugins
+])
+
