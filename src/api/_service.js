@@ -6,6 +6,7 @@ import { get, isEmpty, merge } from 'lodash'
 import qs from 'qs'
 import util from '@/libs/util'
 import store from '@/store'
+import router from '@/router'
 
 import { getToken } from '@/libs/util.auth' // TODO
 import errorCode from '@/libs/util.errorCode'
@@ -16,7 +17,7 @@ import { saveAs } from 'file-saver'
 
 let downloadLoadingInstance;
 // 是否显示重新登录
-export let isRelogin = { show: false };
+// export let isRelogin = { show: false };
 
 /**
  * @description 记录和显示错误
@@ -144,17 +145,20 @@ function createService () {
       switch (code) {
         // 在 code 401 情况下退回到登录页面
         case 401: 
-          if (!isRelogin.show) {
-            isRelogin.show = true;
-            MessageBox.confirm('登录状态已过期，您可以继续留在该页面，或者重新登录', '系统提示', { confirmButtonText: '重新登录', cancelButtonText: '取消', type: 'warning' }).then(() => {
-              isRelogin.show = false;
-              store.dispatch('LogOut').then(() => {
-                location.href = '/index';
-              })
-            }).catch(() => {
-              isRelogin.show = false;
-            });
-          }
+          console.log(`[${code}]`, msg)
+          // throw new Error('请重新登录')
+          router.push({ name: 'login' })
+          break;
+          // if (!isRelogin.show) {
+            // isRelogin.show = true;
+            // store.dispatch('d2admin/account/logout', { confirm: false })
+            // MessageBox.confirm('登录状态已过期，您可以继续留在该页面，或者重新登录', '系统提示', { confirmButtonText: '重新登录', cancelButtonText: '取消', type: 'warning' }).then(() => {
+            //   isRelogin.show = false;
+            //   store.dispatch('d2admin/account/logout', { vm: this, confirm: false })
+            // }).catch(() => {
+            //   isRelogin.show = false;
+            // });
+          // }
           return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
         case 500: 
           Message({ message: msg, type: 'error' })
@@ -209,7 +213,7 @@ function createRequest (service) {
     let token = {}
     // 是否需要设置 token
     const isToken = (config.headers || {}).isToken === false
-    if (getToken() && !isToken) {
+    if (util.cookies.get('token') && !isToken) {
       token['Authorization'] = 'Bearer ' + util.cookies.get('token') // 让每个请求携带自定义token 请根据实际情况自行修改 // TODO
     }
     const configDefault = {

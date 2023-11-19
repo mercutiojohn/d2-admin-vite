@@ -26,7 +26,7 @@ export default {
       username = username.trim()
       // const res = await SYS_USER_LOGIN({ username, password })
       const res = await login(username, password, code, uuid)
-      console.log('[loginResult]', res)
+      // console.log('[loginResult]', res)
       // 设置 cookie 一定要存 uuid 和 token 两个 cookie
       // 整个系统依赖这两个数据进行校验和存储
       // uuid 是用户身份唯一标识 用户注册的时候确定 并且不可改变 不可重复
@@ -36,12 +36,11 @@ export default {
 
       // 获得用户信息
       const userInfo = await getInfo()
-      console.log('[userInfo]', userInfo)
+      // console.log('[userInfo]', userInfo)
 
       util.cookies.set('uuid', userInfo.user.userId) // TODO
 
       // 设置 vuex 用户信息
-      // const avatar = (userInfo.user.avatar == "" || user.avatar == null) ? require("@/assets/images/profile.jpg") : process.env.VUE_APP_BASE_API + userInfo.user.avatar
       const avatar = (userInfo.user.avatar == "" || userInfo.user.avatar == null)
       ? defaultAvatar
       : import.meta.env.VITE_APP_BASE_API + userInfo.user.avatar;      const roles = ['ROLE_DEFAULT']
@@ -50,7 +49,6 @@ export default {
         roles = userInfo.roles
         permissions = userInfo.permissions
       }
-      // await dispatch('d2admin/user/set', { name: username }, { root: true }) // TODO
       await dispatch('d2admin/user/set', {
         token: res.token,
         id: userInfo.user.id,
@@ -58,7 +56,9 @@ export default {
         avatar,
         roles,
         permissions
-      }, { root: true }) // TODO
+      }, { root: true })
+      // 从后台加载菜单路由
+      await dispatch('d2admin/menu/generateRoutes', null, { root: true })
       // 用户登录后从持久化数据加载一系列的设置
       await dispatch('load')
     },

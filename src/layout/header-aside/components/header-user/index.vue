@@ -5,8 +5,8 @@
     </span>
     <!-- <el-avatar shape="square" size="small" :src="info.avatar"></el-avatar> -->
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item @click.native="() => {}">
-        <el-avatar shape="square" size="small" :src="info.avatar"></el-avatar>
+      <el-dropdown-item @click.native="() => {}" class="flex align-start gap-10px p-10px! p-t-5px! p-b-5px!">
+        <el-avatar shape="square" size="small" :src="info.avatar" class="inline-block"></el-avatar>
         {{info.name ? `${info.name}` : '未登录'}}
       </el-dropdown-item>
       <el-dropdown-item divided @click.native="logOff">
