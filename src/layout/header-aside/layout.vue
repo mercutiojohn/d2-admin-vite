@@ -19,14 +19,17 @@
           <d2-icon name="i-ri:menu-fill"/>
         </div>
         <d2-menu-header flex-box="1" v-if="['separate', 'header'].includes(menuMode)"/>
+        <!-- <div class="d2-theme-header-name" v-else>{{currentPage === '/index' ? 'D2Admin' : openedPages.filter((item) => item.fullPath === currentPage)[0].meta.title}}</div> -->
+        <div class="d2-theme-header-name" v-else>{{openedPages.filter((item) => item.fullPath === currentPage)[0].meta.title}}</div>
         <!-- 顶栏右侧 -->
         <div class="d2-header-right" flex-box="0">
           <!-- 如果你只想在开发环境显示这个按钮请添加 v-if="$env === 'development'" -->
           <d2-header-search @click="handleSearchClick"/>
-          <d2-header-log/>
+          <d2-header-log v-if="$env === 'development'"/>
           <d2-header-fullscreen/>
           <d2-header-theme/>
-          <d2-header-size/>
+          <!-- <d2-header-size/> -->
+          <!-- <d2-header-menu-mode/> -->
           <!-- <d2-header-locales/> -->
           <!-- <d2-header-color/> -->
           <d2-header-user/>
@@ -82,7 +85,8 @@ import d2Tabs from './components/tabs/index.vue'
 import d2HeaderFullscreen from './components/header-fullscreen/index.vue'
 import d2HeaderLocales from './components/header-locales/index.vue'
 import d2HeaderSearch from './components/header-search/index.vue'
-import d2HeaderSize from './components/header-size/index.vue'
+// import d2HeaderSize from './components/header-size/index.vue'
+// import d2HeaderMenuMode from './components/header-menu-mode/index.vue'
 import d2HeaderTheme from './components/header-theme/index.vue'
 import d2HeaderUser from './components/header-user/index.vue'
 import d2HeaderLog from './components/header-log/index.vue'
@@ -102,7 +106,8 @@ export default {
     d2HeaderFullscreen,
     d2HeaderLocales,
     d2HeaderSearch,
-    d2HeaderSize,
+    // d2HeaderSize,
+    // d2HeaderMenuMode,
     d2HeaderTheme,
     d2HeaderUser,
     d2HeaderLog,
@@ -125,7 +130,9 @@ export default {
       asideCollapse: state => state.menu.asideCollapse,
       asideLength: state => state.menu.aside.length,
       asideTransition: state => state.menu.asideTransition,
-      menuMode: state => state.menu.menuMode
+      menuMode: state => state.menu.menuMode,
+      openedPages: state => state.page.opened,
+      currentPage: state => state.page.current,
     }),
     ...mapGetters('d2admin', {
       themeActiveSetting: 'theme/activeSetting'
