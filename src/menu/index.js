@@ -1,11 +1,11 @@
 import { uniqueId } from 'lodash'
 
 // 插件
-// import demoPlugins from './modules/demo-plugins'
+import demoPlugins from './modules/demo-plugins'
 // 组件
-// import demoComponents from './modules/demo-components'
+import demoComponents from './modules/demo-components'
 // 功能
-// import demoPlayground from './modules/demo-playground'
+import demoPlayground from './modules/demo-playground'
 
 /**
  * @description 给菜单数据补充上 path 字段
