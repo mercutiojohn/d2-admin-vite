@@ -3,6 +3,7 @@ import util from '@/libs/util.js'
 import router from '@/router'
 // import { SYS_USER_LOGIN } from '@/api/sys.user.js'
 import { login, logout, getInfo } from '@/api/login'
+import defaultAvatar from "@/assets/images/profile.jpg";
 
 const logoutApi = logout
 
@@ -25,16 +26,39 @@ export default {
       username = username.trim()
       // const res = await SYS_USER_LOGIN({ username, password })
       const res = await login(username, password, code, uuid)
-      console.log(res)
+      console.log('[loginResult]', res)
       // 设置 cookie 一定要存 uuid 和 token 两个 cookie
       // 整个系统依赖这两个数据进行校验和存储
       // uuid 是用户身份唯一标识 用户注册的时候确定 并且不可改变 不可重复
       // token 代表用户当前登录状态 建议在网络请求中携带 token
       // 如有必要 token 需要定时更新，默认保存一天
-      util.cookies.set('uuid', username) // TODO
       util.cookies.set('token', res.token)
+
+      // 获得用户信息
+      const userInfo = await getInfo()
+      console.log('[userInfo]', userInfo)
+
+      util.cookies.set('uuid', userInfo.user.userId) // TODO
+
       // 设置 vuex 用户信息
-      await dispatch('d2admin/user/set', { name: username }, { root: true }) // TODO
+      // const avatar = (userInfo.user.avatar == "" || user.avatar == null) ? require("@/assets/images/profile.jpg") : process.env.VUE_APP_BASE_API + userInfo.user.avatar
+      const avatar = (userInfo.user.avatar == "" || userInfo.user.avatar == null)
+      ? defaultAvatar
+      : import.meta.env.VITE_APP_BASE_API + userInfo.user.avatar;      const roles = ['ROLE_DEFAULT']
+      const permissions = []
+      if (res.roles && res.roles.length > 0) { // 验证返回的roles是否是一个非空数组
+        roles = userInfo.roles
+        permissions = userInfo.permissions
+      }
+      // await dispatch('d2admin/user/set', { name: username }, { root: true }) // TODO
+      await dispatch('d2admin/user/set', {
+        token: res.token,
+        id: userInfo.user.id,
+        name: userInfo.user.nickName,
+        avatar,
+        roles,
+        permissions
+      }, { root: true }) // TODO
       // 用户登录后从持久化数据加载一系列的设置
       await dispatch('load')
     },

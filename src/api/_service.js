@@ -210,7 +210,7 @@ function createRequest (service) {
     // 是否需要设置 token
     const isToken = (config.headers || {}).isToken === false
     if (getToken() && !isToken) {
-      token['Authorization'] = 'Bearer ' + getToken() // 让每个请求携带自定义token 请根据实际情况自行修改 // TODO
+      token['Authorization'] = 'Bearer ' + util.cookies.get('token') // 让每个请求携带自定义token 请根据实际情况自行修改 // TODO
     }
     const configDefault = {
       headers: {
