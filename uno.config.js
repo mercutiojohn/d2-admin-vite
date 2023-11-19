@@ -5,7 +5,13 @@ import { presetIcons } from 'unocss'
 export default defineConfig({
   presets: [
     presetUno(),
-    presetIcons({ /* options */ }),
+    presetIcons({ 
+      extraProperties: {
+        display: 'inline-block',
+        'vertical-align': 'middle',
+        // ...
+      },
+    }),
   ],
   pipeline: {
     include: [
