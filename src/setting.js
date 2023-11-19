@@ -11,7 +11,7 @@ export default {
   menu: {
     asideCollapse: false,
     asideTransition: true,
-    menuMode: 'separate' // separate 顶栏和侧栏联动; aside 仅侧栏; header 仅顶栏
+    menuMode: 'aside' // separate 顶栏和侧栏联动; aside 仅侧栏; header 仅顶栏
   },
   // 在读取持久化数据失败时默认页面
   page: {
