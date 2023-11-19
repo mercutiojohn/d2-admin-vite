@@ -424,13 +424,13 @@ export default {
         if (valid) {
           if (this.form.menuId != undefined) {
             updateMenu(this.form).then(response => {
-              this.$modal.msgSuccess("修改成功");
+              this.$message.success("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
             addMenu(this.form).then(response => {
-              this.$modal.msgSuccess("新增成功");
+              this.$message.success("新增成功");
               this.open = false;
               this.getList();
             });
@@ -444,7 +444,7 @@ export default {
         return delMenu(row.menuId);
       }).then(() => {
         this.getList();
-        this.$modal.msgSuccess("删除成功");
+        this.$message.success("删除成功");
       }).catch(() => {});
     }
   }

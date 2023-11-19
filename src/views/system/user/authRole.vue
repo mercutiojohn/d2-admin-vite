@@ -103,7 +103,7 @@ export default {
       const userId = this.form.userId;
       const roleIds = this.roleIds.join(",");
       updateAuthRole({ userId: userId, roleIds: roleIds }).then((response) => {
-        this.$modal.msgSuccess("授权成功");
+        this.$message.success("授权成功");
         this.close();
       });
     },

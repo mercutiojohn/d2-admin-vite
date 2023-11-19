@@ -55,7 +55,7 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           updateUserPwd(this.user.oldPassword, this.user.newPassword).then(response => {
-            this.$modal.msgSuccess("修改成功");
+            this.$message.success("修改成功");
           });
         }
       });

@@ -302,13 +302,13 @@ export default {
         if (valid) {
           if (this.form.configId != undefined) {
             updateConfig(this.form).then(response => {
-              this.$modal.msgSuccess("修改成功");
+              this.$message.success("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
             addConfig(this.form).then(response => {
-              this.$modal.msgSuccess("新增成功");
+              this.$message.success("新增成功");
               this.open = false;
               this.getList();
             });
@@ -323,7 +323,7 @@ export default {
           return delConfig(configIds);
         }).then(() => {
           this.getList();
-          this.$modal.msgSuccess("删除成功");
+          this.$message.success("删除成功");
         }).catch(() => {});
     },
     /** 导出按钮操作 */
@@ -335,7 +335,7 @@ export default {
     /** 刷新缓存按钮操作 */
     handleRefreshCache() {
       refreshCache().then(() => {
-        this.$modal.msgSuccess("刷新成功");
+        this.$message.success("刷新成功");
       });
     }
   }

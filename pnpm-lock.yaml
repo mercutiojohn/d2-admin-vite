@@ -107,6 +107,9 @@ dependencies:
   vue:
     specifier: ^2.7.14
     version: 2.7.14
+  vue-cropper:
+    specifier: 0.5.5
+    version: 0.5.5
   vue-grid-layout:
     specifier: ^2.4.0
     version: 2.4.0(@interactjs/core@1.10.2)(@interactjs/utils@1.10.2)
@@ -4979,6 +4982,10 @@ packages:
       - sugarss
       - supports-color
       - terser
+    dev: false
+
+  /vue-cropper@0.5.5:
+    resolution: {integrity: sha512-5mGaBlS1EwLxUFwHHX2Q8zOZSiVfBUjOfolR+ZNKwu7Rh3u+GhwHYOyFkgZHhhoQBBNdyVB28O6W+MpMimhCbA==}
     dev: false
 
   /vue-grid-layout@2.4.0(@interactjs/core@1.10.2)(@interactjs/utils@1.10.2):

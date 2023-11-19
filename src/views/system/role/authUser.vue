@@ -180,7 +180,7 @@ export default {
         return authUserCancel({ userId: row.userId, roleId: roleId });
       }).then(() => {
         this.getList();
-        this.$modal.msgSuccess("取消授权成功");
+        this.$message.success("取消授权成功");
       }).catch(() => {});
     },
     /** 批量取消授权按钮操作 */
@@ -191,7 +191,7 @@ export default {
         return authUserCancelAll({ roleId: roleId, userIds: userIds });
       }).then(() => {
         this.getList();
-        this.$modal.msgSuccess("取消授权成功");
+        this.$message.success("取消授权成功");
       }).catch(() => {});
     }
   }

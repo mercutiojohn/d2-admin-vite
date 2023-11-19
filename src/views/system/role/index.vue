@@ -399,7 +399,7 @@ export default {
       this.$modal.confirm('确认要"' + text + '""' + row.roleName + '"角色吗？').then(function() {
         return changeRoleStatus(row.roleId, row.status);
       }).then(() => {
-        this.$modal.msgSuccess(text + "成功");
+        this.$message.success(text + "成功");
       }).catch(function() {
         row.status = row.status === "0" ? "1" : "0";
       });
@@ -558,14 +558,14 @@ export default {
           if (this.form.roleId != undefined) {
             this.form.menuIds = this.getMenuAllCheckedKeys();
             updateRole(this.form).then(response => {
-              this.$modal.msgSuccess("修改成功");
+              this.$message.success("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
             this.form.menuIds = this.getMenuAllCheckedKeys();
             addRole(this.form).then(response => {
-              this.$modal.msgSuccess("新增成功");
+              this.$message.success("新增成功");
               this.open = false;
               this.getList();
             });
@@ -578,7 +578,7 @@ export default {
       if (this.form.roleId != undefined) {
         this.form.deptIds = this.getDeptAllCheckedKeys();
         dataScope(this.form).then(response => {
-          this.$modal.msgSuccess("修改成功");
+          this.$message.success("修改成功");
           this.openDataScope = false;
           this.getList();
         });
@@ -591,7 +591,7 @@ export default {
         return delRole(roleIds);
       }).then(() => {
         this.getList();
-        this.$modal.msgSuccess("删除成功");
+        this.$message.success("删除成功");
       }).catch(() => {});
     },
     /** 导出按钮操作 */

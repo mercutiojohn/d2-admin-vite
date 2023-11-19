@@ -283,13 +283,13 @@ export default {
         if (valid) {
           if (this.form.noticeId != undefined) {
             updateNotice(this.form).then(response => {
-              this.$modal.msgSuccess("修改成功");
+              this.$message.success("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
             addNotice(this.form).then(response => {
-              this.$modal.msgSuccess("新增成功");
+              this.$message.success("新增成功");
               this.open = false;
               this.getList();
             });
@@ -304,7 +304,7 @@ export default {
         return delNotice(noticeIds);
       }).then(() => {
         this.getList();
-        this.$modal.msgSuccess("删除成功");
+        this.$message.success("删除成功");
       }).catch(() => {});
     }
   }

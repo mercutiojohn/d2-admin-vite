@@ -57,7 +57,7 @@
 import store from "@/store";
 import { VueCropper } from "vue-cropper";
 import { uploadAvatar } from "@/api/system/user";
-import { debounce } from '@/utils'
+import { debounce } from '@/libs/util.index'
 
 export default {
   components: { VueCropper },
@@ -137,7 +137,7 @@ export default {
           this.open = false;
           this.options.img = process.env.VUE_APP_BASE_API + response.imgUrl;
           store.commit('SET_AVATAR', this.options.img);
-          this.$modal.msgSuccess("修改成功");
+          this.$message.success("修改成功");
           this.visible = false;
         });
       });

@@ -498,7 +498,7 @@ export default {
       this.$modal.confirm('确认要"' + text + '""' + row.userName + '"用户吗？').then(function() {
         return changeUserStatus(row.userId, row.status);
       }).then(() => {
-        this.$modal.msgSuccess(text + "成功");
+        this.$message.success(text + "成功");
       }).catch(function() {
         row.status = row.status === "0" ? "1" : "0";
       });
@@ -594,7 +594,7 @@ export default {
         inputErrorMessage: "用户密码长度必须介于 5 和 20 之间"
       }).then(({ value }) => {
           resetUserPwd(row.userId, value).then(response => {
-            this.$modal.msgSuccess("修改成功，新密码是：" + value);
+            this.$message.success("修改成功，新密码是：" + value);
           });
         }).catch(() => {});
     },
@@ -609,13 +609,13 @@ export default {
         if (valid) {
           if (this.form.userId != undefined) {
             updateUser(this.form).then(response => {
-              this.$modal.msgSuccess("修改成功");
+              this.$message.success("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
             addUser(this.form).then(response => {
-              this.$modal.msgSuccess("新增成功");
+              this.$message.success("新增成功");
               this.open = false;
               this.getList();
             });
@@ -630,7 +630,7 @@ export default {
         return delUser(userIds);
       }).then(() => {
         this.getList();
-        this.$modal.msgSuccess("删除成功");
+        this.$message.success("删除成功");
       }).catch(() => {});
     },
     /** 导出按钮操作 */
