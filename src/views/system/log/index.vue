@@ -148,7 +148,7 @@ export default {
     }
   },
   mounted() {
-    console.log('[log]', this.log)
+    // console.log('[log]', this.log)
   }
 }
 </script>
