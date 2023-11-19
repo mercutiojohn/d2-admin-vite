@@ -41,10 +41,10 @@
           ref="aside"
           :class="{'d2-theme-container-aside': true, 'd2-theme-container-transition': asideTransition}"
           :style="{
-            width: asideLength ? (asideCollapse ? asideWidthCollapse : asideWidth) : 0,
+            width: asideLength && ['separate', 'aside'].includes(menuMode) ? (asideCollapse ? asideWidthCollapse : asideWidth) : 0,
             // opacity: this.searchActive ? 0.5 : 1
           }">
-          <d2-menu-side/>
+          <d2-menu-side v-if="['separate', 'aside'].includes(menuMode)"/>
         </div>
         <!-- 主体 -->
         <div class="d2-theme-container-main" flex-box="1" flex>
