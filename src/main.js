@@ -13,8 +13,10 @@ import store from "@/store"
 
 // VueRouter
 import router from '@/router'
-import { menuHeader, menuAside } from '@/menu'
+import { menuHeader, menuAside, menuSeparate, menuSearch } from '@/menu'
 import { frameInRoutes } from '@/router/routes'
+
+import { mapState } from 'vuex'
 
 // plugins
 import '@/plugin'
@@ -26,13 +28,24 @@ new Vue({
   router,
   i18n,
   render: h => h(App),
+  computed: {
+    ...mapState('d2admin/menu', [
+      'menuMode',
+    ])
+  },
   created () {
     // 处理路由 得到每一级的路由设置
     this.$store.commit('d2admin/page/init', frameInRoutes)
-    // 设置顶栏菜单
-    this.$store.commit('d2admin/menu/headerSet', menuHeader)
+    // 设置顶栏和侧栏菜单
+    if (this.menuMode === 'header') {
+      this.$store.commit('d2admin/menu/headerSet', menuHeader)
+    } else if (this.menuMode === 'aside') {
+      this.$store.commit('d2admin/menu/asideSet', menuAside)
+    } else if (this.menuMode === 'separate') {
+      this.$store.commit('d2admin/menu/headerSet', menuSeparate.header)
+    }
     // 初始化菜单搜索功能
-    this.$store.commit('d2admin/search/init', menuHeader)
+    this.$store.commit('d2admin/search/init', menuSearch)
   },
   mounted () {
     // 展示系统信息
@@ -48,8 +61,8 @@ new Vue({
     // 检测路由变化切换侧边栏内容
     '$route.matched': {
       handler (matched) {
-        if (matched.length > 0) {
-          const _side = menuAside.filter(menu => menu.path === matched[0].path)
+        if (this.menuMode === 'separate' && matched.length > 0) {
+          const _side = menuSeparate.aside.filter(menu => menu.path === matched[0].path)
           this.$store.commit('d2admin/menu/asideSet', _side.length > 0 ? _side[0].children : [])
         }
       },
