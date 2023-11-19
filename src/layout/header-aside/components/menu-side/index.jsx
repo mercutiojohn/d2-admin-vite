@@ -8,7 +8,8 @@ export default {
     menuMixin
   ],
   render (h) {
-    return <div class="d2-layout-header-aside-menu-side">
+    if (this.aside.length === 0 && !this.asideCollapse) return null
+    else return <div class="d2-layout-header-aside-menu-side">
       <d2-scrollbar>
         <el-menu
           collapse={ this.asideCollapse }

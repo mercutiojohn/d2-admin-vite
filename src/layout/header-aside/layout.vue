@@ -41,7 +41,7 @@
           ref="aside"
           :class="{'d2-theme-container-aside': true, 'd2-theme-container-transition': asideTransition}"
           :style="{
-            width: asideCollapse ? asideWidthCollapse : asideWidth,
+            width: asideLength ? (asideCollapse ? asideWidthCollapse : asideWidth) : 0,
             opacity: this.searchActive ? 0.5 : 1
           }">
           <d2-menu-side/>
@@ -123,6 +123,7 @@ export default {
       grayActive: state => state.gray.active,
       transitionActive: state => state.transition.active,
       asideCollapse: state => state.menu.asideCollapse,
+      asideLength: state => state.menu.aside.length,
       asideTransition: state => state.menu.asideTransition
     }),
     ...mapGetters('d2admin', {
