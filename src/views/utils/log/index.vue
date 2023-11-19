@@ -62,7 +62,6 @@
       </el-table-column>
       <!-- 查看详情 -->
       <el-table-column
-        fixed="right"
         align="center"
         label="More"
         width="100">
