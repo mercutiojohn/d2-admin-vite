@@ -5,7 +5,7 @@
     <!-- 主体内容 -->
     <div class="d2-layout-header-aside-content" flex="dir:top">
       <!-- 顶栏 -->
-      <div class="d2-theme-header" :style="{ opacity: this.searchActive ? 0.5 : 1 }" flex-box="0" flex>
+      <div class="d2-theme-header" :style="{ /* opacity: this.searchActive ? 0.5 : 1 */ }" flex-box="0" flex>
         <div :class="`window-controls-area ${currPlatform}`" v-if="isElectron && currPlatform === 'mac'"></div>
         <router-link
           to="/index"
@@ -42,7 +42,7 @@
           :class="{'d2-theme-container-aside': true, 'd2-theme-container-transition': asideTransition}"
           :style="{
             width: asideLength ? (asideCollapse ? asideWidthCollapse : asideWidth) : 0,
-            opacity: this.searchActive ? 0.5 : 1
+            // opacity: this.searchActive ? 0.5 : 1
           }">
           <d2-menu-side/>
         </div>
