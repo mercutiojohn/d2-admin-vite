@@ -67,6 +67,19 @@ new Vue({
         }
       },
       immediate: true
+    },
+    menuMode: {
+      handler (menuMode) {
+        // 设置顶栏和侧栏菜单
+        if (menuMode === 'header') {
+          this.$store.commit('d2admin/menu/headerSet', menuHeader)
+        } else if (this.menuMode === 'aside') {
+          this.$store.commit('d2admin/menu/asideSet', menuAside)
+        } else if (this.menuMode === 'separate') {
+          this.$store.commit('d2admin/menu/headerSet', menuSeparate.header)
+        }
+      },
+      immediate: true
     }
   }
 }).$mount('#app')
