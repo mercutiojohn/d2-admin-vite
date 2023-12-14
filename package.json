@@ -51,6 +51,7 @@
     "sortablejs": "^1.15.0",
     "ua-parser-js": "^0.8.1",
     "vite-plugin-md": "^0.21.5",
+    "vite-plugin-path-resolve": "^1.0.1",
     "vite-plugin-vue2": "^2.0.3",
     "vite-svg-loader": "^4.0.0",
     "vue": "^2.7.14",

@@ -4,6 +4,11 @@ import createSvgSpritePlugin from 'vite-plugin-svg-sprite'
 import Markdown from 'vite-plugin-md'
 import UnoCSS from 'unocss/vite'
 import { resolve } from 'path'
+// import pathResolve from 'vite-plugin-path-resolve'
+
+// function getPath(dir) {
+//   return path.resolve(path.dirname(fileURLToPath(import.meta.url)), dir)
+// }
 
 export default {
   plugins: [
@@ -18,12 +23,15 @@ export default {
       symbolId: 'd2-[name]',
     }),
     Markdown(),
-    UnoCSS()
+    UnoCSS(),
+    // pathResolve({ src: getPath('src') }),
   ],
 
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
+      // ElTable生产环境不显示解决，ref: https://github.com/ElemeFE/element/issues/21968#issuecomment-1537071209
+      vue$: 'vue/dist/vue.esm.js',
     },
   },
 
